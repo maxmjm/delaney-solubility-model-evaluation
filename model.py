@@ -1,6 +1,7 @@
 import pandas 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
 dataframe = pandas.read_csv("delaney_solubility_with_descriptors.csv")
 
@@ -26,3 +27,15 @@ y_test_lr_prediction = lr.predict(x_test)
 
 print(y_train_lr_prediction) # Predict 80% of data
 print(y_test_lr_prediction) # Predict remaining 20% of data
+
+# Evaluate the model's performance
+lr_train_mse = mean_squared_error(y_train, y_train_lr_prediction)
+lr_train_r2 = r2_score(y_train, y_train_lr_prediction)
+
+lr_test_mse = mean_squared_error(y_test, y_test_lr_prediction)
+lr_test_r2 = r2_score(y_test, y_test_lr_prediction)
+
+print(lr_train_mse)
+print(lr_train_r2)
+print(lr_test_mse)
+print(lr_test_r2)
