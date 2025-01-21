@@ -92,3 +92,8 @@ rf_results.columns = ["Method", "Training MSE", "Training R2", "Test MSE", "Test
 
 print(rf_results)
 print("--------------------------")
+
+# Compare results from linear regression and random forest
+dataframe_models = pandas.concat([lr_results, rf_results], axis=0)
+
+print(dataframe_models)
