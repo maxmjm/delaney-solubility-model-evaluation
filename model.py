@@ -49,21 +49,21 @@ print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print(y_test_lr_prediction) # Predict remaining 20% of data
 print("--------------------------")
 
-# Evaluate the model's performance
+# Evaluate the model's performance using linear regression
 lr_train_mse = mean_squared_error(y_train, y_train_lr_prediction)
 lr_train_r2 = r2_score(y_train, y_train_lr_prediction)
 
 lr_test_mse = mean_squared_error(y_test, y_test_lr_prediction)
 lr_test_r2 = r2_score(y_test, y_test_lr_prediction)
 
-# Evaluate mean squared error and r2 score in tabular form
+# Evaluate mean squared error and r2 score for lr in tabular form
 lr_results = pandas.DataFrame(["Linear Regression", lr_train_mse, lr_train_r2, lr_test_mse, lr_test_r2]).transpose()
 lr_results.columns = ["Method", "Training MSE", "Training R2", "Test MSE", "Test R2"]
 
 print(lr_results)
 print("--------------------------")
 
-# Apply the model to make predictions using random forests
+# Apply the model to make predictions using random forest
 rf = RandomForestRegressor(max_depth=2, random_state=100)
 rf.fit(x_train, y_train)
 
@@ -77,4 +77,18 @@ print("--------------------------")
 print("RF Prediction (Test)")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print(y_test_rf_prediction) # Predict remaining 20% of data
+print("--------------------------")
+
+# Evaluate the model's performance using random forest
+rf_train_mse = mean_squared_error(y_train, y_train_rf_prediction)
+rf_train_r2 = r2_score(y_train, y_train_rf_prediction)
+
+rf_test_mse = mean_squared_error(y_test, y_test_rf_prediction)
+rf_test_r2 = r2_score(y_test, y_test_rf_prediction)
+
+# Evaluate mean squared error and r2 score for rf in tabular form
+rf_results = pandas.DataFrame(["Random Forest", rf_train_mse, rf_train_r2, rf_test_mse, rf_test_r2]).transpose()
+rf_results.columns = ["Method", "Training MSE", "Training R2", "Test MSE", "Test R2"]
+
+print(rf_results)
 print("--------------------------")
