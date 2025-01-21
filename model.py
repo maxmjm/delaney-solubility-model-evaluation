@@ -3,6 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.ensemble import RandomForestRegressor
+import matplotlib.pyplot as plt
+import numpy as np
 
 dataframe = pandas.read_csv("delaney_solubility_with_descriptors.csv")
 
@@ -97,3 +99,13 @@ print("--------------------------")
 dataframe_models = pandas.concat([lr_results, rf_results], axis=0).reset_index(drop=True)
 
 print(dataframe_models)
+
+# Visualise data using scatter-plot
+plt.figure(figsize=(5,5))
+plt.scatter(x=y_train, y=y_train_lr_prediction, c="green", alpha=0.3)
+z = np.polyfit(y_train, y_train_lr_prediction, 1) # Line of best fit
+p = np.poly1d(z)
+plt.plot(y_train, p(y_train), c="red")
+plt.xlabel("Experimental LogS")
+plt.ylabel("Predict LogS")
+plt.show()
