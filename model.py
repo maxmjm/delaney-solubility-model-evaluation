@@ -2,6 +2,7 @@ import pandas
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.ensemble import RandomForestRegressor
 
 dataframe = pandas.read_csv("delaney_solubility_with_descriptors.csv")
 
@@ -32,7 +33,7 @@ print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print(y_test)
 print("--------------------------")
 
-# Apply the model to make predictions
+# Apply the model to make predictions using linear regression
 lr = LinearRegression()
 lr.fit(x_train, y_train) 
 
@@ -60,3 +61,20 @@ lr_results = pandas.DataFrame(["Linear Regression", lr_train_mse, lr_train_r2, l
 lr_results.columns = ["Method", "Training MSE", "Training R2", "Test MSE", "Test R2"]
 
 print(lr_results)
+print("--------------------------")
+
+# Apply the model to make predictions using random forests
+rf = RandomForestRegressor(max_depth=2, random_state=100)
+rf.fit(x_train, y_train)
+
+y_train_rf_prediction = rf.predict(x_train)
+y_test_rf_prediction = rf.predict(x_test)
+
+print("RF Prediction (Train)")
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print(y_train_rf_prediction)# Predict 80% of data
+print("--------------------------")
+print("RF Prediction (Test)")
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print(y_test_rf_prediction) # Predict remaining 20% of data
+print("--------------------------")
