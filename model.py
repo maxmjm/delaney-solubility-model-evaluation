@@ -94,6 +94,6 @@ print(rf_results)
 print("--------------------------")
 
 # Compare results from linear regression and random forest
-dataframe_models = pandas.concat([lr_results, rf_results], axis=0)
+dataframe_models = pandas.concat([lr_results, rf_results], axis=0).reset_index(drop=True)
 
 print(dataframe_models)
